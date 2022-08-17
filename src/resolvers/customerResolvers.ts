@@ -3,7 +3,6 @@ import { MyContext } from "src/type";
 import { Customer } from "../entities/Customer";
 import argon2 from 'argon2';
 import { createAccessToken } from "../utils/auth";
-import { isAuth } from "../utils/isAuth";
 @ObjectType()
 class LoginResponse {
     @Field()
@@ -30,7 +29,7 @@ export class CustomerResolver {
     // }
 
     @Mutation(() => Boolean)
-    async register(@Arg('name', () => String) name: string, @Arg('username', () => String) username: string, @Arg('email', () => String) email: string, @Arg('age', () => Number) age: number, @Arg('creditCard', () => String, { nullable: true }) creditCard: string, @Arg('password', () => String) password: string, @Ctx() { em }: MyContext) {
+    public async register(@Arg('name', () => String) name: string, @Arg('username', () => String) username: string, @Arg('email', () => String) email: string, @Arg('age', () => Number) age: number, @Arg('creditCard', () => String, { nullable: true }) creditCard: string, @Arg('password', () => String) password: string, @Ctx() { em }: MyContext) {
 
         const hashedPassword = await argon2.hash(password);
         const hashedCreditCardNumber = await argon2.hash(creditCard);

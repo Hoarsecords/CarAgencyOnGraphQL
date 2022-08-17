@@ -5,7 +5,6 @@ import { Reservation } from "../entities/Reservation";
 import { Driver } from "../entities/Driver";
 import { Car } from "../entities/Car";
 import { Customer } from "../entities/Customer";
-import e from "express";
 
 @ObjectType()
 class FieldError {
@@ -56,12 +55,12 @@ export class ReservationResolver {
                 }]
             }
         }
+        const reservation = em.create(Reservation, { driver: driver, car: car, customer: customer })
+        await em.persistAndFlush(reservation);
         car.available = false;
         driver.available = false;
         await em.persistAndFlush(car);
         await em.persistAndFlush(driver);
-        const reservation = em.create(Reservation, { driver: driver, car: car, customer: customer })
-        await em.persistAndFlush(reservation);
         return { reservation };
 
 
