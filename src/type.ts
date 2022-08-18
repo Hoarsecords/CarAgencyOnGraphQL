@@ -1,7 +1,7 @@
-import { Connection, IDatabaseDriver, EntityManager } from "@mikro-orm/core"
 import { Request, Response } from "express"
+import {SqlEntityManager} from "@mikro-orm/postgresql";
 export type MyContext = {
-    em: EntityManager<any> & EntityManager<IDatabaseDriver<Connection>>,
+    em: SqlEntityManager,
     req: Request,
     res: Response,
     payload?: { username: string }
