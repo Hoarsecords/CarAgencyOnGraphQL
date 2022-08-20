@@ -1,4 +1,4 @@
-import {ApolloServerPluginLandingPageGraphQLPlayground} from "apollo-server-core";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 require('dotenv').config({ path: __dirname + '/.env' });
 import { MikroORM } from "@mikro-orm/core";
 import mikroOrmConfig from "./mikro-orm.config";
@@ -11,8 +11,8 @@ import { ReservationResolver } from "./resolvers/reservationsResolver";
 
 
 export const createMikroORM = async (test = false) => {
-    let options = {...mikroOrmConfig};
-    const orm = await MikroORM.init(test ? {...options, dbName: 'CarAgency-example-test'} : options);
+    let options = { ...mikroOrmConfig };
+    const orm = await MikroORM.init(test ? { ...options, dbName: 'CarAgency-example-test' } : options);
     await orm.getSchemaGenerator().refreshDatabase();
     return orm;
 }

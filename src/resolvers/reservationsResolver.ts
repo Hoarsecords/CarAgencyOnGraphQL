@@ -63,7 +63,5 @@ export class ReservationResolver {
         const reservation = em.create(Reservation, { driver: driver, car: car, customer: customer })
         await em.persistAndFlush(reservation);
         return { reservation };
-
-
     }
 }
